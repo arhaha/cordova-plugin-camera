@@ -399,8 +399,9 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
             // croppedUri = Uri.fromFile(photo);
             // intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, croppedUri);
             // } else {
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            //intent.setAction(Intent.ACTION_GET_CONTENT);
+            //intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setAction(Intent.ACTION_PICK);
             // }
         } else if (this.mediaType == VIDEO) {
             intent.setType("video/*");

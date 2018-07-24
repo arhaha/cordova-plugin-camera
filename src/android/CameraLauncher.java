@@ -399,8 +399,8 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
             // croppedUri = Uri.fromFile(photo);
             // intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, croppedUri);
             // } else {
-            //intent.setAction(Intent.ACTION_GET_CONTENT);
-            //intent.addCategory(Intent.CATEGORY_OPENABLE);
+            // intent.setAction(Intent.ACTION_GET_CONTENT);
+            // intent.addCategory(Intent.CATEGORY_OPENABLE);
             intent.setAction(Intent.ACTION_PICK);
             // }
         } else if (this.mediaType == VIDEO) {
@@ -490,9 +490,15 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                 cropIntent.putExtra("outputY", targetHeight);
             }
             if (targetHeight > 0 && targetWidth > 0 && targetWidth == targetHeight) {
-                cropIntent.putExtra("aspectX", 1);
-                cropIntent.putExtra("aspectY", 1);
+                if (android.os.Build.MODEL.contains("HUAWEI")) {// 华为特殊处理 不然会显示圆
+                    cropIntent.putExtra("aspectX", 9998);
+                    cropIntent.putExtra("aspectY", 9999);
+                } else {
+                    cropIntent.putExtra("aspectX", 1);
+                    cropIntent.putExtra("aspectY", 1);
+                }
             }
+
             // create new file handle to get full resolution crop
             croppedUri = Uri.fromFile(createCaptureFile(this.encodingType, System.currentTimeMillis() + ""));
             cropIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

@@ -1,6 +1,6 @@
 {
   "name": "com.matrixgz.cordova-plugin-camera",
-  "version": "4.0.6",
+  "version": "4.0.7",
   "description": "Cordova Camera Plugin",
   "types": "./types/index.d.ts",
   "cordova": {

@@ -836,7 +836,8 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                             // have to delete you
                             // application cache I'm adding the current system time to the end of the file
                             // url.
-                            this.callbackContext.success("file://" + modifiedPath + "?" + System.currentTimeMillis());
+                            // 不在后面加料
+                            this.callbackContext.success("file://" + modifiedPath);
 
                         } catch (Exception e) {
                             e.printStackTrace();

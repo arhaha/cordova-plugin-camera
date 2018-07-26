@@ -444,8 +444,15 @@ public class CameraLauncher extends CordovaPlugin implements MediaScannerConnect
                 cropIntent.putExtra("outputY", targetHeight);
             }
             if (targetHeight > 0 && targetWidth > 0 && targetWidth == targetHeight) {
-                cropIntent.putExtra("aspectX", 1);
-                cropIntent.putExtra("aspectY", 1);
+                if (android.os.Build.MODEL.contains("HUAWEI")) {// 华为特殊处理 不然会显示圆
+                    LOG.e(LOG_TAG, "performCropGallery HUAWEI");
+                    cropIntent.putExtra("aspectX", 9998);
+                    cropIntent.putExtra("aspectY", 9999);
+                } else {
+                    LOG.e(LOG_TAG, "performCropCamera NORMAL");
+                    cropIntent.putExtra("aspectX", 1);
+                    cropIntent.putExtra("aspectY", 1);
+                }
             }
             // create new file handle to get full resolution crop
             croppedUri = Uri.fromFile(createCaptureFile(this.encodingType, System.currentTimeMillis() + ""));
